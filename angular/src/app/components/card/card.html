@@ -3,5 +3,5 @@
     <h1 class="card-title">{{ product().title}}</h1>
     <p class="card-price">$ {{ product().price}}</p>
     <p class="card-category">{{product().category}}</p>
-    <a class="card-details" href="">More details</a>
+    <a class="card-details" [href]="`product/${product().id}`">More details</a>
 </div>
