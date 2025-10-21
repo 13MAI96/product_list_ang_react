@@ -1,0 +1,10 @@
+<div class="home">
+    <div class="search">
+        <input class="search-input" type="text" placeholder="Search here" [formControl]="search_text">
+    </div>
+    <div class="table">
+        @for(product of apiService.filtered_products | async; track product.id){
+            <app-card [product]="product"></app-card>
+        }
+    </div>
+</div>
