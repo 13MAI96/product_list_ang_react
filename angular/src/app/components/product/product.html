@@ -2,9 +2,12 @@
     <img class="product-img" [src]=product()?.image alt="">
     <div class="product-details">
         <div class="product-rating">
-            @for(star of stars; track star){
-                <app-star [class]="star.class"></app-star>
-            }
+            <div class="product-rating-stars">
+                @for(star of stars; track star){
+                    <app-star [class]="star.class"></app-star>
+                }
+            </div>
+            <p class="product-rating-count">{{product()?.rating?.count}} votes</p>
         </div>
         <h1 class="product-title">{{product()?.title}}</h1>
         <p class="product-category">{{product()?.category}}</p>
