@@ -1,5 +1,5 @@
 <div class="product">
-    <img class="product-img" [src]=product()?.image alt="">
+    <img class="product-img" [src]=product()?.image alt="" (load)="onImageLoaded()">
     <div class="product-details">
         <div class="product-rating">
             <div class="product-rating-stars">

@@ -1,1 +1,7 @@
 <router-outlet />
+
+@if(apiService.spinner | async){
+    <app-spinner ></app-spinner>
+}
+
+<ng-template #tooltip></ng-template>
