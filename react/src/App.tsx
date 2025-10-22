@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import './App.css'
 import { Card } from './components/card'
 import type { ListedProduct } from './models/ListedProduct'
@@ -5,7 +6,11 @@ import { useApiService } from './services/api.service'
 
 
 function App() {
-  const {filtered_products, filterByText} = useApiService()
+  const {filtered_products, filterByText, getProducts} = useApiService()
+
+  useEffect(() => {
+        getProducts()
+    }, [])
 
   return (
     <>
