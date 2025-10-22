@@ -17,7 +17,6 @@ export class App implements AfterViewInit {
   private tootipService = inject(TooltipService)
 
   ngAfterViewInit(): void {
-    console.log(this.tooltip)
     this.tootipService.setContainer(this.tooltip)
   }
 }
