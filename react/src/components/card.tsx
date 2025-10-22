@@ -11,9 +11,9 @@ export function Card({item}: {item: ListedProduct}) {
             src={item.image}
           />
           <h1 className='card-title'>{item.title}</h1>
-          <p className="card-price">$19.99</p>
-          <p className='card-category'>Category..</p>
-          <Link to="/products/1">More details</Link>
+          <p className="card-price">$ {item.price}</p>
+          <p className='card-category'>{item.category}</p>
+          <Link className='card-details' to={{ pathname: `/product/${item.id}`}}>More details</Link>
         </div>
       </section>
   );

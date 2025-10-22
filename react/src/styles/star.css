@@ -1,0 +1,10 @@
+.star{
+    width: 32px;
+    height: 32px;
+    .basic{
+        fill: #c2c2c2;  
+    }
+    .checked{
+        fill: #f7c53d;
+    }
+}

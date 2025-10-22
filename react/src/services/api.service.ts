@@ -1,3 +1,4 @@
+import type { DetailedProduct } from "../models/DetailedProduct";
 import type { ListedProduct } from "../models/ListedProduct";
 import { useEffect, useState } from "react";
 
@@ -21,8 +22,8 @@ export const useApiService = () => {
         setFilteredProducts(filtered)
     }
 
-    const getProductById = async (id: number) => {
-        return await fetch(`${apiUrl}/${id}`).then(res => res.json)
+    const getProductById = async (id: number): Promise<DetailedProduct> => {
+        return await fetch(`${apiUrl}/${id}`).then(res => res.json())
     }
 
     return {filtered_products, filterByText, getProductById}

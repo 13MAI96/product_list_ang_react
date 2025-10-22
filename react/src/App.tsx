@@ -1,6 +1,3 @@
-import { useState, type ChangeEvent } from 'react'
-
-import viteLogo from '/vite.svg'
 import './App.css'
 import { Card } from './components/card'
 import type { ListedProduct } from './models/ListedProduct'
@@ -12,8 +9,8 @@ function App() {
 
   return (
     <>
-      <div>
-        <input type="text" onChange={e => filterByText(e.target.value)}/>
+      <div className='search'>
+        <input className="search-input"  type="text" onChange={e => filterByText(e.target.value)}/>
       </div>
       <section className='table'>
         {

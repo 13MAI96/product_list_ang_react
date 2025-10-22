@@ -1,13 +1,13 @@
 .card{
-    width: 180px;
-    height: 300px;
+    width: 240px;
+    height: 350px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px #c2c2c2;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 5px;
+    padding: 30px;
     box-sizing: border-box;
 }
 
@@ -39,5 +39,5 @@
     margin: 2px;
 }
 .card-details{
-    margin: 5px 2px 2px 2px;
+    margin: 10px 2px 2px 2px;
 }
