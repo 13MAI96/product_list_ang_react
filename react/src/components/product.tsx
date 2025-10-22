@@ -4,27 +4,52 @@ import { useApiService } from '../services/api.service';
 import { useEffect, useState } from 'react';
 import type { DetailedProduct } from '../models/DetailedProduct';
 import { Star } from './star';
+import { Spinner } from './spinner';
+import { Tooltip } from './tooltip';
 
 export function Product() {
     const params = useParams()
     const navigate = useNavigate()
-    const {getProductById} = useApiService()
+    const {getProductById, setSpinnerStatus, spinnerStatus, tooltip, notify} = useApiService()
     const [item, setItem] = useState<DetailedProduct>()
     const [stars, setStars] = useState<{checked: boolean, id: number}[]>([])
     
     useEffect( () => {
-        getProductById(Number(params.id)).then(data => {
-            setItem(data)
-            const element = []
-            for (let index = 1; index <= 5; index++) {
-                element.push({id: index, checked: data.rating.rate >= index})
+        setSpinnerStatus(true)
+        try {
+          getProductById(Number(params.id)).then(data => {
+            if(data){
+              setItem(data)
+              const element = []
+              for (let index = 1; index <= 5; index++) {
+                  element.push({id: index, checked: data.rating.rate >= index})
+              }
+              setStars(element)
+              setSpinnerStatus(false)
+            } else {
+              notifyAndGoHome('The product does not exist.')
             }
-            console.log(element)
-            setStars(element)
-        })
+          }).catch(() => {
+            notifyAndGoHome('The product could not be obtained.')
+          })
+        } catch (error) {
+          notifyAndGoHome('The product could not be obtained.')
+        }
     }, [])
 
+  const notifyAndGoHome = (message: string) => {
+    notify(message)
+    setTimeout(() => {navigate('/')}, 1500)
+  }
+
   return (
+    <>    
+      {
+        spinnerStatus && <Spinner></Spinner>
+      }
+      {
+        tooltip && (<Tooltip message={tooltip}></Tooltip>)
+      }
       <section className='product'>
         <img
         className='product-image'
@@ -48,5 +73,6 @@ export function Product() {
           </div>
         </div>
       </section>
+    </>
   );
 }

@@ -35,7 +35,7 @@ export class Product {
       } else {
         this.tooltip.notify('The product does not exist.')
         setTimeout(()=>{
-          this.router.navigate([''])
+          this.goHome()
         }, 1500)
       }
     }, error: (err) => {

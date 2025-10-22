@@ -6,13 +6,34 @@ export const useApiService = () => {
     const apiUrl: string = 'https://fakestoreapi.com/products';
     const [products, setProducts] = useState<ListedProduct[]>([])
     const [filtered_products, setFilteredProducts] = useState<ListedProduct[]>([]);
+    const [spinnerStatus, setSpinnerStatus] = useState(false)
+
+    /** No hay ganas de hacer otro hook solo para el tooltip */
+    const [tooltip, setTooltip] = useState<string | undefined>()
+
+    const notify = (message: string) => {
+        setTooltip(message)
+        setTimeout(() => {
+            setTooltip(undefined)
+        }, 2000)
+    }
+
 
     const getProducts = () => {
-        fetch(apiUrl).then(res => res.json())
-        .then(data => {
-            setProducts(data)
-            setFilteredProducts(data)
-        })
+        setSpinnerStatus(true)
+        try {
+            fetch(apiUrl).then(res => res.json())
+            .then(data => {
+                setProducts(data)
+                setFilteredProducts(data)
+                setSpinnerStatus(false)
+            }).catch((err) => {
+                console.error(err)
+                notify('An error ocurred while retrieving the product list.')
+            })
+        } catch (error) {
+            notify('An error ocurred while retrieving the product list.')
+        }
     }
 
     const filterByText = (text: string) => {
@@ -26,5 +47,14 @@ export const useApiService = () => {
         return await fetch(`${apiUrl}/${id}`).then(res => res.json())
     }
 
-    return {filtered_products, filterByText, getProductById, getProducts}
+    return {
+        filtered_products, 
+        filterByText, 
+        getProductById, 
+        getProducts, 
+        spinnerStatus, 
+        setSpinnerStatus,
+        notify,
+        tooltip
+    }
 }
